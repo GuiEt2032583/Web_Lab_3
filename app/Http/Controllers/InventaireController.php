@@ -9,6 +9,6 @@ class InventaireController extends Controller
 {
     public function __invoke()
     {
-       return view("Inventaire", Produit::all());
+        return view("Inventaire", ["produits"=>Produit::all()]);
     }
 }

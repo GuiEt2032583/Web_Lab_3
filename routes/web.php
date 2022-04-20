@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', InventaireController::class);
 Route::get('/details/{id}', DetailsController::class);
 Route::get('/ajout', [AjoutController::class, 'show']);
-Route::get('/modification', [ModificationController::class, 'show']);
+Route::get('/modification/{id}', [ModificationController::class, 'show']);
 
 //Route POST
 Route::post('/ajout', [AjoutController::class, 'add']);
-Route::post('/modification', [ModificationController::class, 'modify']);
+Route::post('/modification/{id}', [ModificationController::class, 'modify']);
 

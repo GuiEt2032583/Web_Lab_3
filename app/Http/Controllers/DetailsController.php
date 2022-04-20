@@ -9,8 +9,7 @@ class DetailsController extends Controller
 {
     public function __invoke($id)
     {
-        $produit = Produit::where('id', $id)->get();
-        echo $produit;
-        return view('details', $produit);
+        $produit = Produit::where('id', $id)->firstOrFail();
+        return view('Details', ['produit'=>$produit]);
     }
 }
