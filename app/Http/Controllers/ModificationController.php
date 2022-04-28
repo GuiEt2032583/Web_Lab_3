@@ -16,11 +16,19 @@ class ModificationController extends Controller
     {
         $produit = Produit::find($id);
 
-        $produit->nom = $req->input("nom");
-        $produit->quantite = $req->input("quantite");
-        $produit->description = $req->input("description");
-        $produit->prix = $req->input("prix");
-        $produit->fournisseur = $req->input("fournisseur");
+        $fields = $req->validate([
+            'nom' => 'required|string',
+            'quantite' => 'required|integer',
+            'description' => 'required|string',
+            'prix' => 'required|numeric',
+            'fournisseur' => 'required|string'
+        ]);
+
+        $produit->nom = $fields['nom'];
+        $produit->quantite = $fields['quantite'];
+        $produit->description = $fields['description'];
+        $produit->prix = $fields['prix'];
+        $produit->fournisseur = $fields['fournisseur'];
         $produit->save();
 
         echo $produit;

@@ -15,13 +15,23 @@ class AjoutController extends Controller
 
     public function add(Request $req)
     {
+
+        $fields = $req->validate([
+            'nom' => 'required|string',
+            'quantite' => 'required|integer',
+            'description' => 'required|string',
+            'prix' => 'required|numeric',
+            'fournisseur' => 'required|string'
+        ]);
+
+
         $nouveauProduit = new Produit();
 
-        $nouveauProduit->nom = $req->input("nom");
-        $nouveauProduit->quantite = $req->input("quantite");
-        $nouveauProduit->description = $req->input("description");
-        $nouveauProduit->prix = $req->input("prix");
-        $nouveauProduit->fournisseur = $req->input("fournisseur");
+        $nouveauProduit->nom = $fields['nom'];
+        $nouveauProduit->quantite = $fields['quantite'];
+        $nouveauProduit->description = $fields['description'];
+        $nouveauProduit->prix = $fields['prix'];
+        $nouveauProduit->fournisseur = $fields['fournisseur'];
         $nouveauProduit->save();
         return redirect()->action(InventaireController::class);
     }
